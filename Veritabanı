@@ -1,0 +1,111 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.1
+-- Dumped by pg_dump version 14.0
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: gorev; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.gorev (
+    gorevid integer NOT NULL,
+    gorevad character varying(30) NOT NULL
+);
+
+
+ALTER TABLE public.gorev OWNER TO postgres;
+
+--
+-- Name: kullanici; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.kullanici (
+    kullaniciid integer NOT NULL,
+    gorevid integer NOT NULL,
+    kullaniciad character varying NOT NULL,
+    kullanicisifre integer NOT NULL
+);
+
+
+ALTER TABLE public.kullanici OWNER TO postgres;
+
+--
+-- Data for Name: gorev; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.gorev VALUES
+	(1, 'mudur'),
+	(2, 'kullanici');
+
+
+--
+-- Data for Name: kullanici; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.kullanici VALUES
+	(1, 1, 'zeynep', 123),
+	(2, 1, 'ilknur', 321),
+	(3, 2, 'nurgül', 159);
+
+
+--
+-- Name: gorev gorev_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gorev
+    ADD CONSTRAINT gorev_pkey PRIMARY KEY (gorevid);
+
+
+--
+-- Name: kullanici kullanici_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.kullanici
+    ADD CONSTRAINT kullanici_pkey PRIMARY KEY (kullaniciid);
+
+
+--
+-- Name: gorev unique_gorev_gorevid; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.gorev
+    ADD CONSTRAINT unique_gorev_gorevid UNIQUE (gorevid);
+
+
+--
+-- Name: kullanici unique_kullanici_kullaniciid; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.kullanici
+    ADD CONSTRAINT unique_kullanici_kullaniciid UNIQUE (kullaniciid);
+
+
+--
+-- Name: kullanici gorevkullanici; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.kullanici
+    ADD CONSTRAINT gorevkullanici FOREIGN KEY (gorevid) REFERENCES public.gorev(gorevid) MATCH FULL ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
