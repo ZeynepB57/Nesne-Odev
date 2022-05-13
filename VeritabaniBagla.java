@@ -13,7 +13,7 @@ public class VeritabaniBagla implements IVeritabaniBagla {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/NYATdb",
-                    "postgres", "134105");
+                    "postgres", "sifre");
             if (conn != null){
                 System.out.println("Veritabanına bağlandı!");
             System.out.println("Bağlantı girişimi başarılı!");}
